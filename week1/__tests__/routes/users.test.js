@@ -1,11 +1,8 @@
-const {ExpectationFailed} = require('http-errors');
-
 const request = require('supertest')
 
 const app = require('../../app')
 
 const {db, client} = require('../../services/database');
-
 
 describe('Get Users', () => {
     beforeEach(async () => {

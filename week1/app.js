@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
+// eslint-disable-next-line no-undef
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -17,6 +18,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -28,7 +30,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
