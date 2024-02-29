@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    command: npm start
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=example
+    expose:
+      - "27017"
+    volumes:
+        - mongo-data:/data/db
+        - ./mongo-data/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    restart: always
+volumes:
+    mongo-data: {}
