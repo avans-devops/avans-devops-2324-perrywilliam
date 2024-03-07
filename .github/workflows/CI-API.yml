@@ -22,5 +22,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
+        working-directory: ./w1
       - run: npx eslint . --fix
+        working-directory: ./w1
       - run: npm test
+        working-directory: ./w1
