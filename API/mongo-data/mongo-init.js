@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Create a new database and switch to it
 db = db.getSiblingDB('example');
 
