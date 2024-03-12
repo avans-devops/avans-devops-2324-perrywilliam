@@ -1,0 +1,57 @@
+kind: Environment
+name: production
+type: primary
+urlHandle: xvvzdy
+components:
+    -
+        kind: Application
+        name: app
+        gitRepo: 'https://github.com/avans-devops/avans-devops-2324-perrywilliam.git'
+        gitBranch: main
+        gitApplicationPath: API
+        dockerCompose:
+            build:
+                context: ./API
+                dockerfile: Dockerfile.prod
+            command:
+                - npm
+                - start
+            environment:
+                NODE_ENV: development
+                PORT: '3000'
+            ports:
+                - '3000:3000'
+        hosts:
+            -
+                hostname: 'app-{{ env.base_domain }}'
+                path: /
+                servicePort: 3000
+    -
+        kind: Application
+        name: frontend
+        gitRepo: 'https://github.com/avans-devops/avans-devops-2324-perrywilliam.git'
+        gitBranch: main
+        gitApplicationPath: frontend
+        dockerCompose:
+            build:
+                context: ./frontend
+                dockerfile: Dockerfile
+            environment:
+                NODE_ENV: development
+                PORT: '80'
+            ports:
+                - '80:4200'
+        hosts:
+            -
+                hostname: 'frontend-{{ env.base_domain }}'
+                path: /
+                servicePort: 80
+volumes:
+    -
+        name: mongo-data
+        size: 1Gi
+        type: disk
+    -
+        name: mongo-datazsebn0p6l1o3v
+        size: 1Gi
+        type: disk
