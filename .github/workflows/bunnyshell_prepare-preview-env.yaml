@@ -11,9 +11,9 @@ on:
 jobs:
   deploy_prepare:
     name: Prepare Deployment of Environment
-    uses: bunnyshell/workflows/.github/workflows/prepare-configuration.yaml@v2
+    uses: .bunnyshell/workflows/.github/workflows/prepare-configuration.yaml@v2
     with:
-      bunnyshell-yaml-path: .bunnyshell/bunnyshell.yaml
+      bunnyshell-yaml-path: .bunnyshell/.bunnyshell.yaml
       allowed-users: "*"
       git-ref: refs/pull/${{ github.event.number || github.event.issue.number }}/head
       restricted-files: |
