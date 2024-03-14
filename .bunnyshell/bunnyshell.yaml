@@ -1,12 +1,12 @@
 kind: Environment
 name: preview
 type: primary
-urlHandle: pwwb
+urlHandle: wballeko-devops
 components:
     -
         kind: Application
         name: app
-        gitRepo: 'https://github.com/avans-devops/avans-devops-2324-perrywilliam.git'
+        gitRepo: 'https://github.com/wballeko/avans-devops-2324-perrywilliam.git'
         gitBranch: main
         gitApplicationPath: API
         dockerCompose:
@@ -29,7 +29,7 @@ components:
     -
         kind: Application
         name: frontend
-        gitRepo: 'https://github.com/avans-devops/avans-devops-2324-perrywilliam.git'
+        gitRepo: 'https://github.com/wballeko/avans-devops-2324-perrywilliam.git'
         gitBranch: main
         gitApplicationPath: frontend
         dockerCompose:
@@ -46,12 +46,24 @@ components:
                 hostname: 'frontend-{{ env.base_domain }}'
                 path: /
                 servicePort: 80
+    -
+        kind: Database
+        name: mongo
+        dockerCompose:
+            environment:
+                MONGO_INITDB_ROOT_PASSWORD: example
+                MONGO_INITDB_ROOT_USERNAME: root
+            image: mongo
+            restart: always
+            ports:
+                - '27017:27017'
+        volumes:
+            -
+                name: mongo-data
+                mount: /data/db
+                subPath: ''
 volumes:
     -
         name: mongo-data
-        size: 1Gi
-        type: disk
-    -
-        name: mongo-datazsebn0p6l1o3v
         size: 1Gi
         type: disk
