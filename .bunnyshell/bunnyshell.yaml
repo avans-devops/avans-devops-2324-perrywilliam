@@ -2,9 +2,6 @@ kind: Environment
 name: preview
 type: primary
 urlHandle: pwwb
-environmentVariables:
-    BUNNYSHELL_CLUSTER_ID: ngM7jKEGbe
-    BUNNYSHELL_PROJECT_ID: JGrzbv4rz7
 components:
     -
         kind: Application
