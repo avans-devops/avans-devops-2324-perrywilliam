@@ -6,7 +6,9 @@ on:
     types:
       - completed
 permissions:
+  contents: write
   pull-requests: write
+  repository-projects: write
 jobs:
   load-artifact-from-reusable:
     name: Load artifact values
@@ -22,8 +24,8 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' && needs.load-artifact-from-reusable.outputs.skip-deployment == 'false' }}
     with:
       pr-number: ${{ needs.load-artifact-from-reusable.outputs.pr-number }}
-      project-id: "JGrzbv4rz7"
-      cluster-id: "ngM7jKEGbe"
+      project-id: ${{ vars.BUNNYSHELL_PROJECT_ID }}
+      cluster-id: ${{ vars.BUNNYSHELL_CLUSTER_ID }}
       env-name: "Demo PR #${{ needs.load-artifact-from-reusable.outputs.pr-number }}"
       bunnyshell-yaml-contents: ${{ needs.load-artifact-from-reusable.outputs.bunnyshell-yaml-contents }}
       comment-on-pr: true
