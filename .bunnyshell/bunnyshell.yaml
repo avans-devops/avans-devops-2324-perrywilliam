@@ -1,7 +1,7 @@
 kind: Environment
 name: preview
 type: primary
-urlHandle: pwwb
+urlHandle: pwwbs
 components:
     -
         kind: Application
