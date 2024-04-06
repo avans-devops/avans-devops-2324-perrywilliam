@@ -26,6 +26,10 @@ services:
         - mongo-data:/data/db
         - ./mongo-data/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     restart: always
+  db-exporter:
+    image: prom/mysqld-exporter
+    environment:
+      - MONGODB_URI=mongodb://root:example@mongo:27017/
   frontend:
     build: ./frontend
     ports:
@@ -38,5 +42,18 @@ services:
       - PORT=80
     depends_on:
       - app
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    ports:
+      - 9090:80
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+  grafana:
+    build: ../avans-devops-2324-perrywilliam/grafana
+    ports:
+      - 3000:3000
 volumes:
+    prometheus-data:
     mongo-data: {}
