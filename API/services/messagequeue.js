@@ -1,6 +1,5 @@
 require('dotenv').config();
 const amqplib = require('amqplib/callback_api');
-const { sendRegistrationMail } = require('../data_access/sendgrid')
 const queue = 'api';
 
 const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://localhost';
