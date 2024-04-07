@@ -4,19 +4,11 @@ const queue = 'api';
 
 const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://localhost';
 
-let retries = 5;
-
 async function openConnection() {
-  if (retries === 0) {
-    console.log('Failed to connect after 5 attempts, please check your connection');
-    return;
-  } 
 
   amqplib.connect(RABBITMQ_URL, (err, conn) => {
     if (err) {
-      console.log('Failed to connect, retrying in 3 seconds...');
-      retries--;
-      setTimeout(openConnection, 3000);
+      console.error(err);
       return;
     }
 
