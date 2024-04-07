@@ -29,7 +29,7 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "80:4200"
+      - "80:80"
     volumes:
       - ./frontend:/frontend
       - /frontend/node_modules
@@ -40,7 +40,7 @@ services:
       - app
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq
+    container_name: rabbitmq-devops
     ports:
       - "4369:4369"
       - "5671:5671"
