@@ -1,17 +1,18 @@
-FROM node:21-alpine3.18
+FROM node:20-alpine as builder
 
-# Dependencies
+# Copy package list
 COPY package.json API/package.json
+COPY package-lock.json API/package-lock.json
 
-# Working directory
+# Install Packages
 WORKDIR /API
+RUN ["npm", "ci"]
 
-# Install dependencies
-RUN npm install
-
-# Copy all files
-COPY . /API
-
+# Open port 3000
 EXPOSE 3000
 
-ENTRYPOINT ["npm", "run", "dev"]
+# Copy source code to the app
+COPY . /API
+
+# Default command to run when container starts
+CMD ["npm", "start"]
