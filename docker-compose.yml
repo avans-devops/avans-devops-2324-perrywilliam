@@ -37,7 +37,7 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "81:4200"
+      - "80:80"
     volumes:
       - ./frontend:/frontend
       - /frontend/node_modules
@@ -58,6 +58,19 @@ services:
     build: ../avans-devops-2324-perrywilliam/grafana
     ports:
       - "3000:3000"
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-devops
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "15671:15671"
+      - "15672:15672"
+      - "25672:25672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: secret
 volumes:
     prometheus-data:
     mongo-data: {}
