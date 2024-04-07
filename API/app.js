@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var { openConnection } = require('./services/messagequeue');
 
 var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
@@ -39,5 +40,7 @@ app.use(function(err, req, res) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+openConnection();
 
 module.exports = app;
